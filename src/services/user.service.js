@@ -109,4 +109,114 @@ router.post("/get-one", checkPermission, async (req, res) => {
     }
 });
 
+router.get("/list/save/:id", auth, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { username } = req.user;
+
+        if (!(username && id)) {
+            return res.status(400).send("Username and bookId are required");
+        }
+
+        // Find the user by username
+        const user = await userModel.findOne({ username });
+
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        // Check if the book is not already in the user's savedBooks
+        const isBookAlreadySaved = user.savedBooks.some(
+            (savedBookId) => savedBookId.toString() === id.toString()
+        );
+
+        if (isBookAlreadySaved) {
+            return res.status(409).json({ error: "Book already saved by the user" });
+        }
+
+        // Add the book reference (bookId) to the user's savedBooks array
+        user.savedBooks.push(id);
+        await user.save();
+
+        return res.status(201).json(user.savedBooks);
+    } catch (error) {
+        console.error("Error saving book to user's list:", error);
+        return res.status(500).json({ error: "Failed to save book to the user's list" });
+    }
+});
+
+
+// Find own saved books by username
+router.get("/list/find", auth, async (req, res) => {
+    try {
+        const { username } = req.user;
+
+        if (!username) {
+            return res.status(400).send("Username is required");
+        }
+
+        // Find the user by username and return their savedBooks
+        const user = await userModel.findOne({ username });
+
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        return res.status(200).json(user.savedBooks);
+    } catch (error) {
+        console.error("Error retrieving user's saved books:", error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+// Find a user's saved books by username
+router.get("/list/find/:username", auth, async (req, res) => {
+    try {
+        const { username } = req.params;
+
+        if (!username) {
+            return res.status(400).send("Username is required");
+        }
+
+        // Find the user by username and return their savedBooks
+        const user = await userModel.findOne({ username });
+
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        return res.status(200).json(user.savedBooks);
+    } catch (error) {
+        console.error("Error retrieving user's saved books:", error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+// Remove a book from a user's saved books by bookId
+router.delete("/list/delete/:bookId", auth, async (req, res) => {
+    try {
+        const { username } = req.user;
+        const { bookId } = req.params;
+
+        if (!bookId) {
+            return res.status(400).send("Book ID is required");
+        }
+
+        // Find the user by username and remove the bookId from the savedBooks array
+        const user = await userModel.findOne({ username });
+
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        user.savedBooks = user.savedBooks.filter((savedBookId) => savedBookId.toString() !== bookId);
+        await user.save();
+
+        return res.status(200).json(user.savedBooks);
+    } catch (error) {
+        console.error("Error deleting book from user's saved books:", error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+});
+
 module.exports = router;
