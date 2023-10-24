@@ -1,6 +1,7 @@
 const express = require('express');
 const bookModel = require('../models/book.model');
 const { auth, checkPermission } = require('../middleware/auth');
+const userModel = require('../models/user.model');
 
 const router = express.Router();
 
@@ -23,12 +24,23 @@ router.post('/save', checkPermission, async (req, res) => {
       description,
     });
 
+    // Save the book to the user's publishedBooks array
+    const user = await userModel.findOne({ username: author });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    user.publishedBooks.push(book);
+    await user.save();
+
     return res.status(201).json(book);
   } catch (error) {
     console.error('Error saving book to MongoDB:', error);
     return res.status(500).json({ error: 'Failed to save book to the database' });
   }
 });
+
 
 // Get all books
 router.get('/get-all', auth, async (req, res) => {
