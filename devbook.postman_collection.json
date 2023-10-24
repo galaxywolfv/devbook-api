@@ -1,0 +1,452 @@
+{
+	"info": {
+		"_postman_id": "b444e5e4-e680-48f8-bd74-522c33ffbab7",
+		"name": "devbook",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17788370"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"devran\",\r\n    \"password\": \"devran\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4001/user/save",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"user",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "bearer",
+						"value": "U2FsdGVkX1/KjUkgAkflhH2gsdKW7trMAIeSSN44hCV4eEDkWo6Edcm5lnpxlpQobeFKlSP1GEIL/DEIP1RWipNAJEHKUknto7hWNCfsvDfvw3tiu88O8y/x5YPyMJFh554hL0lBoc83glDvYPZVpzsjDLH2iv6jKvmBlpnuzXntSOtsr1HDxLSzl1UK7XVxkeH1ByxJId3fMgXGIuRt/NbI6Bcv978aqer3FAP1NKUFVVK5nbMVBEiqWVPaJHGyMIw2mni7w6jLyHdQvpSf+Iv/+wSXt3DUmMBtArbk0foIyXCE39+7BzbLL2IQxwmv",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4001/user/get-all",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"user",
+						"get-all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Self",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "bearer",
+						"value": "U2FsdGVkX18T2JvR1rtOmhdq0J8iQywlHlCWl6oF0N+94rLAwT60gOiz08oHPPzuPBcwAHf9vGGc3rTnXi2+Uc/xYMwgPdkgFfXej75mbRCEvIOGib9RFKg1uSUI5PF0cwouZX2pN1IlP61m3YAvKBsk1HQNqGlr9CeQqDWI6OVDUuSaBvyJdlxqu7v7VLU5hIJmOC6wHSEbYNw4xSCMfZPfAWUJr5fRon4CncATyuiLjm9T3L3h6xG+69lWN/Wc8GMqut3smGyKuSXpVF8GX9wkAbJEo24ZKX8dhv8WjGo=",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:4001/user/get-self",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"user",
+						"get-self"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"devadmin\",\r\n    \"password\": \"devadmin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4001/user/login",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get One User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "bearer",
+						"value": "U2FsdGVkX1/KjUkgAkflhH2gsdKW7trMAIeSSN44hCV4eEDkWo6Edcm5lnpxlpQobeFKlSP1GEIL/DEIP1RWipNAJEHKUknto7hWNCfsvDfvw3tiu88O8y/x5YPyMJFh554hL0lBoc83glDvYPZVpzsjDLH2iv6jKvmBlpnuzXntSOtsr1HDxLSzl1UK7XVxkeH1ByxJId3fMgXGIuRt/NbI6Bcv978aqer3FAP1NKUFVVK5nbMVBEiqWVPaJHGyMIw2mni7w6jLyHdQvpSf+Iv/+wSXt3DUmMBtArbk0foIyXCE39+7BzbLL2IQxwmv",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"devuser\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4001/user/get-one",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"user",
+						"get-one"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get book",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.consumet.org/books/libgen/s?bookTitle=Quantum Entanglement&page=1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"consumet",
+						"org"
+					],
+					"path": [
+						"books",
+						"libgen",
+						"s"
+					],
+					"query": [
+						{
+							"key": "bookTitle",
+							"value": "Quantum Entanglement"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Book to List",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "bearer",
+						"value": "U2FsdGVkX1/KjUkgAkflhH2gsdKW7trMAIeSSN44hCV4eEDkWo6Edcm5lnpxlpQobeFKlSP1GEIL/DEIP1RWipNAJEHKUknto7hWNCfsvDfvw3tiu88O8y/x5YPyMJFh554hL0lBoc83glDvYPZVpzsjDLH2iv6jKvmBlpnuzXntSOtsr1HDxLSzl1UK7XVxkeH1ByxJId3fMgXGIuRt/NbI6Bcv978aqer3FAP1NKUFVVK5nbMVBEiqWVPaJHGyMIw2mni7w6jLyHdQvpSf+Iv/+wSXt3DUmMBtArbk0foIyXCE39+7BzbLL2IQxwmv",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4001/user/list/save/65381c9239e3a0cfa730115c",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"user",
+						"list",
+						"save",
+						"65381c9239e3a0cfa730115c"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "6538156b5f7076639bd83ed0",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Book",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "bearer",
+						"value": "U2FsdGVkX1/KjUkgAkflhH2gsdKW7trMAIeSSN44hCV4eEDkWo6Edcm5lnpxlpQobeFKlSP1GEIL/DEIP1RWipNAJEHKUknto7hWNCfsvDfvw3tiu88O8y/x5YPyMJFh554hL0lBoc83glDvYPZVpzsjDLH2iv6jKvmBlpnuzXntSOtsr1HDxLSzl1UK7XVxkeH1ByxJId3fMgXGIuRt/NbI6Bcv978aqer3FAP1NKUFVVK5nbMVBEiqWVPaJHGyMIw2mni7w6jLyHdQvpSf+Iv/+wSXt3DUmMBtArbk0foIyXCE39+7BzbLL2IQxwmv",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Quantum Entanglement\",\r\n  \"isbn\": [\"1234567890\"],\r\n  \"link\": \"http://62.182.86.140/main/1486000/5a7ff3d25f3cf0ff57457de2041279d6/%20%20-%20The%20age%20of%20entanglement%20%3A%20when%20quantum%20physics%20was%20reborn-Alfred%20A.%20Knopf%20%282008%29.pdf\",\r\n  \"image\": \"https://libgen.li/comicscovers_repository/638000/39e123d7125d5fffe043b34ac7552573.jpg\",\r\n  \"description\": \"Quantum Entanglement, Fun!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4001/book/save",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"book",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Books",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "bearer",
+						"value": "U2FsdGVkX1/KjUkgAkflhH2gsdKW7trMAIeSSN44hCV4eEDkWo6Edcm5lnpxlpQobeFKlSP1GEIL/DEIP1RWipNAJEHKUknto7hWNCfsvDfvw3tiu88O8y/x5YPyMJFh554hL0lBoc83glDvYPZVpzsjDLH2iv6jKvmBlpnuzXntSOtsr1HDxLSzl1UK7XVxkeH1ByxJId3fMgXGIuRt/NbI6Bcv978aqer3FAP1NKUFVVK5nbMVBEiqWVPaJHGyMIw2mni7w6jLyHdQvpSf+Iv/+wSXt3DUmMBtArbk0foIyXCE39+7BzbLL2IQxwmv",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:4001/book/get-all",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"book",
+						"get-all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Book",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "bearer",
+						"value": "U2FsdGVkX1/KjUkgAkflhH2gsdKW7trMAIeSSN44hCV4eEDkWo6Edcm5lnpxlpQobeFKlSP1GEIL/DEIP1RWipNAJEHKUknto7hWNCfsvDfvw3tiu88O8y/x5YPyMJFh554hL0lBoc83glDvYPZVpzsjDLH2iv6jKvmBlpnuzXntSOtsr1HDxLSzl1UK7XVxkeH1ByxJId3fMgXGIuRt/NbI6Bcv978aqer3FAP1NKUFVVK5nbMVBEiqWVPaJHGyMIw2mni7w6jLyHdQvpSf+Iv/+wSXt3DUmMBtArbk0foIyXCE39+7BzbLL2IQxwmv",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4001/book/get/65381c9239e3a0cfa730115c",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"book",
+						"get",
+						"65381c9239e3a0cfa730115c"
+					],
+					"query": [
+						{
+							"key": "bearer",
+							"value": "U2FsdGVkX1/KjUkgAkflhH2gsdKW7trMAIeSSN44hCV4eEDkWo6Edcm5lnpxlpQobeFKlSP1GEIL/DEIP1RWipNAJEHKUknto7hWNCfsvDfvw3tiu88O8y/x5YPyMJFh554hL0lBoc83glDvYPZVpzsjDLH2iv6jKvmBlpnuzXntSOtsr1HDxLSzl1UK7XVxkeH1ByxJId3fMgXGIuRt/NbI6Bcv978aqer3FAP1NKUFVVK5nbMVBEiqWVPaJHGyMIw2mni7w6jLyHdQvpSf+Iv/+wSXt3DUmMBtArbk0foIyXCE39+7BzbLL2IQxwmv",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Book",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "bearer",
+						"value": "U2FsdGVkX1/KjUkgAkflhH2gsdKW7trMAIeSSN44hCV4eEDkWo6Edcm5lnpxlpQobeFKlSP1GEIL/DEIP1RWipNAJEHKUknto7hWNCfsvDfvw3tiu88O8y/x5YPyMJFh554hL0lBoc83glDvYPZVpzsjDLH2iv6jKvmBlpnuzXntSOtsr1HDxLSzl1UK7XVxkeH1ByxJId3fMgXGIuRt/NbI6Bcv978aqer3FAP1NKUFVVK5nbMVBEiqWVPaJHGyMIw2mni7w6jLyHdQvpSf+Iv/+wSXt3DUmMBtArbk0foIyXCE39+7BzbLL2IQxwmv",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Quantum Entanglement\",\r\n  \"isbn\": [\"1234567890\", \"0987654321\"],\r\n  \"link\": \"http://62.182.86.140/main/1486000/5a7ff3d25f3cf0ff57457de2041279d6/%20%20-%20The%20age%20of%20entanglement%20%3A%20when%20quantum%20physics%20was%20reborn-Alfred%20A.%20Knopf%20%282008%29.pdf\",\r\n  \"image\": \"https://libgen.li/comicscovers_repository/638000/39e123d7125d5fffe043b34ac7552573.jpg\",\r\n  \"description\": \"Quantum Entanglement, Fun!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4001/book/update/65381c9239e3a0cfa730115c",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"book",
+						"update",
+						"65381c9239e3a0cfa730115c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Book",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "bearer",
+						"value": "U2FsdGVkX1/KjUkgAkflhH2gsdKW7trMAIeSSN44hCV4eEDkWo6Edcm5lnpxlpQobeFKlSP1GEIL/DEIP1RWipNAJEHKUknto7hWNCfsvDfvw3tiu88O8y/x5YPyMJFh554hL0lBoc83glDvYPZVpzsjDLH2iv6jKvmBlpnuzXntSOtsr1HDxLSzl1UK7XVxkeH1ByxJId3fMgXGIuRt/NbI6Bcv978aqer3FAP1NKUFVVK5nbMVBEiqWVPaJHGyMIw2mni7w6jLyHdQvpSf+Iv/+wSXt3DUmMBtArbk0foIyXCE39+7BzbLL2IQxwmv",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:4001/book/delete/6538179d261e3b6fd02ead70",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"book",
+						"delete",
+						"6538179d261e3b6fd02ead70"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Saved Books",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "bearer",
+						"value": "U2FsdGVkX1/KjUkgAkflhH2gsdKW7trMAIeSSN44hCV4eEDkWo6Edcm5lnpxlpQobeFKlSP1GEIL/DEIP1RWipNAJEHKUknto7hWNCfsvDfvw3tiu88O8y/x5YPyMJFh554hL0lBoc83glDvYPZVpzsjDLH2iv6jKvmBlpnuzXntSOtsr1HDxLSzl1UK7XVxkeH1ByxJId3fMgXGIuRt/NbI6Bcv978aqer3FAP1NKUFVVK5nbMVBEiqWVPaJHGyMIw2mni7w6jLyHdQvpSf+Iv/+wSXt3DUmMBtArbk0foIyXCE39+7BzbLL2IQxwmv",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:4001/user/list/find",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"user",
+						"list",
+						"find"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove From List",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "bearer",
+						"value": "U2FsdGVkX1/KjUkgAkflhH2gsdKW7trMAIeSSN44hCV4eEDkWo6Edcm5lnpxlpQobeFKlSP1GEIL/DEIP1RWipNAJEHKUknto7hWNCfsvDfvw3tiu88O8y/x5YPyMJFh554hL0lBoc83glDvYPZVpzsjDLH2iv6jKvmBlpnuzXntSOtsr1HDxLSzl1UK7XVxkeH1ByxJId3fMgXGIuRt/NbI6Bcv978aqer3FAP1NKUFVVK5nbMVBEiqWVPaJHGyMIw2mni7w6jLyHdQvpSf+Iv/+wSXt3DUmMBtArbk0foIyXCE39+7BzbLL2IQxwmv",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:4001/user/list/delete/6538156b5f7076639bd83ed0",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"user",
+						"list",
+						"delete",
+						"6538156b5f7076639bd83ed0"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
