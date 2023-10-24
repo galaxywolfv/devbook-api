@@ -28,8 +28,10 @@ async function init() {
         await database.connect();
 
         const userService = require('./services/user.service.js');
+        const bookService = require('./services/book.service.js');
 
         app.use('/user', userService);
+        app.use('/book', bookService);
 
         app.get('/', (req, res) => {
           res.status(200).json('Welcome to devbook API');
