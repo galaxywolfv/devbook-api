@@ -104,11 +104,24 @@ router.delete('/delete/:id', auth, async (req, res) => {
   try {
     const { id } = req.params;
 
+    // Find the book to be deleted
     const deletedBook = await bookModel.findOneAndDelete({ _id: id });
 
     if (!deletedBook) {
       return res.status(404).json({ error: 'Book not found' });
     }
+
+    // Remove the book from the user's publishedBooks
+    await userModel.updateMany(
+      {},
+      { $pull: { publishedBooks: id } }
+    );
+
+    // Remove the book from users' savedBooks
+    await userModel.updateMany(
+      { savedBooks: id },
+      { $pull: { savedBooks: id } }
+    );
 
     return res.status(200).json(deletedBook);
   } catch (error) {
