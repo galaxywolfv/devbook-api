@@ -73,7 +73,7 @@ router.post('/login', async (req, res) => {
         }
     } catch (error) {
         console.error('Error saving data to MongoDB:', error);
-        return res.status(500).json({ error: 'Failed to save data to the database' });
+        return res.status(500).json({ error: 'Invalid Credentials' });
     }
 });
 
@@ -156,7 +156,7 @@ router.get("/list/find", auth, async (req, res) => {
         }
 
         // Find the user by username and return their savedBooks
-        const user = await userModel.findOne({ username });
+        const user = await userModel.findOne({ username }).populate('savedBooks');
 
         if (!user) {
             return res.status(404).json({ error: "User not found" });
@@ -179,7 +179,7 @@ router.get("/list/find/:username", auth, async (req, res) => {
         }
 
         // Find the user by username and return their savedBooks
-        const user = await userModel.findOne({ username });
+        const user = await userModel.findOne({ username }).populate('savedBooks');
 
         if (!user) {
             return res.status(404).json({ error: "User not found" });
@@ -215,6 +215,52 @@ router.delete("/list/delete/:bookId", auth, async (req, res) => {
         return res.status(200).json(user.savedBooks);
     } catch (error) {
         console.error("Error deleting book from user's saved books:", error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+// Find own published books by username
+router.get("/publish/find", auth, async (req, res) => {
+    try {
+        const { username } = req.user;
+
+        if (!username) {
+            return res.status(400).send("Username is required");
+        }
+
+        // Find the user by username and populate the publishedBooks field with book documents
+        const user = await userModel.findOne({ username }).populate('publishedBooks');
+
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        return res.status(200).json(user.publishedBooks);
+    } catch (error) {
+        console.error("Error retrieving user's published books:", error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+// Find a user's published books by username
+router.get("/publish/find/:username", auth, async (req, res) => {
+    try {
+        const { username } = req.params;
+
+        if (!username) {
+            return res.status(400).send("Username is required");
+        }
+
+        // Find the user by username and populate the publishedBooks field with book documents
+        const user = await userModel.findOne({ username }).populate('publishedBooks');
+
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        return res.status(200).json(user.publishedBooks);
+    } catch (error) {
+        console.error("Error retrieving user's published books:", error);
         return res.status(500).json({ error: "Internal server error" });
     }
 });

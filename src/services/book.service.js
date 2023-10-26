@@ -8,19 +8,16 @@ const router = express.Router();
 // Create a new book
 router.post('/save', checkPermission, async (req, res) => {
   try {
-    const { title, isbn, link, image, description } = req.body;
+    const { title, description } = req.body;
     const author = req.user.username;
 
-    if (!(title && author && isbn && link && description)) {
+    if (!(title && author && description)) {
       return res.status(400).send('All input is required');
     }
 
     const book = await bookModel.create({
       title,
       author,
-      isbn,
-      link,
-      image,
       description,
     });
 
@@ -74,16 +71,16 @@ router.post('/get/:id', auth, async (req, res) => {
 router.put('/update/:id', auth, async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, isbn, link, image, description } = req.body;
+    const { title, description } = req.body;
     const author = req.user.username;
 
-    if (!(title && author && isbn && link && description)) {
+    if (!(title && author && description)) {
       return res.status(400).send('All input is required');
     }
 
     const updatedBook = await bookModel.findByIdAndUpdate(
       id,
-      { title, author, isbn, link, image, description },
+      { title, author, description },
       { new: true }
     );
 

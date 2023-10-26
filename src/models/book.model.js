@@ -10,15 +10,6 @@ const bookSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  isbn: {
-    type: [String],
-    required: true,
-  },
-  link: {
-    type: String,
-    required: true,
-  },
-  image: String,
   description: String
 });
 
