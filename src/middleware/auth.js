@@ -44,7 +44,7 @@ const auth = async (req, res, next) => {
     return next();
 };
 
-const checkPermission = async (req, res, next) => {
+const checkPermissionLevelAdmin = async (req, res, next) => {
     const token = req.headers["bearer"] || req.body.token;
     if (!token) {
         return res.status(401).send("A token is required for authentication");
@@ -52,6 +52,42 @@ const checkPermission = async (req, res, next) => {
     try {
         const user = await getUserFromToken(token);
         if (user.role === 0) {
+            req.user = user;
+            return next();
+        } else {
+            return res.status(403).send("Access denied. Insufficient role permissions.");
+        }
+    } catch (err) {
+        return res.status(401).send("Error: Authorization failed.");
+    }
+};
+
+const checkPermissionLevelAuthor = async (req, res, next) => {
+    const token = req.headers["bearer"] || req.body.token;
+    if (!token) {
+        return res.status(401).send("A token is required for authentication");
+    }
+    try {
+        const user = await getUserFromToken(token);
+        if (user.role === 1) {
+            req.user = user;
+            return next();
+        } else {
+            return res.status(403).send("Access denied. Insufficient role permissions.");
+        }
+    } catch (err) {
+        return res.status(401).send("Error: Authorization failed.");
+    }
+};
+
+const checkPermissionLevelAdminAndAuthor = async (req, res, next) => {
+    const token = req.headers["bearer"] || req.body.token;
+    if (!token) {
+        return res.status(401).send("A token is required for authentication");
+    }
+    try {
+        const user = await getUserFromToken(token);
+        if (user.role === 0 || user.role === 1) {
             req.user = user;
             return next();
         } else {
@@ -75,5 +111,7 @@ const getUserFromToken = async (token) => {
 module.exports = {
     encryptToken,
     auth,
-    checkPermission
+    checkPermissionLevelAdmin,
+    checkPermissionLevelAuthor,
+    checkPermissionLevelAdminAndAuthor
 };

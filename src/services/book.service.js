@@ -1,12 +1,12 @@
 const express = require('express');
 const bookModel = require('../models/book.model');
-const { auth, checkPermission } = require('../middleware/auth');
+const { auth, checkPermissionLevelAuthor, checkPermissionLevelAdmin, checkPermissionLevelAdminAndAuthor } = require('../middleware/auth');
 const userModel = require('../models/user.model');
 
 const router = express.Router();
 
 // Create a new book
-router.post('/save', checkPermission, async (req, res) => {
+router.post('/save', checkPermissionLevelAuthor, async (req, res) => {
   try {
     const { title, description } = req.body;
     const author = req.user.username;
@@ -68,7 +68,7 @@ router.post('/get/:id', auth, async (req, res) => {
 });
 
 // Update a book by id
-router.put('/update/:id', auth, async (req, res) => {
+router.put('/update/:id', checkPermissionLevelAuthor, async (req, res) => {
   try {
     const { id } = req.params;
     const { title, description } = req.body;
@@ -97,7 +97,7 @@ router.put('/update/:id', auth, async (req, res) => {
 
 
 // Delete a book by id
-router.delete('/delete/:id', auth, async (req, res) => {
+router.delete('/delete/:id', checkPermissionLevelAdminAndAuthor, async (req, res) => {
   try {
     const { id } = req.params;
 

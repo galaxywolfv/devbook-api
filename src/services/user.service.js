@@ -3,12 +3,12 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const userModel = require("../models/user.model");
-const { auth, encryptToken, checkPermission } = require('../middleware/auth');
+const { auth, encryptToken, checkPermissionLevelAdmin } = require('../middleware/auth');
 
 require('mongodb');
 require('dotenv').config();
 
-const { SECRET_KEY, FACTOR } = process.env;
+const { SECRET_KEY, FACTOR, ROLE } = process.env;
 
 const router = express.Router();
 
@@ -36,9 +36,7 @@ router.post('/save', async (req, res) => {
             password: password
         });
 
-        const role = 1;
-
-        const token = jwt.sign({ user_id: user._id, username, role },
+        const token = jwt.sign({ user_id: user._id, username, ROLE },
             SECRET_KEY, { expiresIn: "1y" });
 
         return res.status(201).json(encryptToken(token));
@@ -77,28 +75,33 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.get("/get-self", auth, async (req, res) => {
+router.get("/role", auth, async (req, res) => {
     try {
         const username = req.user.username
         const user = await userModel.findOne({ username });
-        res.status(200).json(user);
+        res.status(200).json(user.role);
     } catch (error) {
         console.error('Error from MongoDB:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
 
-router.get("/get-all", checkPermission, async (req, res) => {
+router.get("/get-self", auth, async (req, res) => {
     try {
-        const users = await userModel.find();
-        res.status(200).json(users);
+        const username = req.user.username;
+        const user = await userModel.findOne({ username });
+        
+        const userWithoutPassword = { ...user._doc };
+        delete userWithoutPassword.password;
+
+        res.status(200).json(userWithoutPassword);
     } catch (error) {
         console.error('Error from MongoDB:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
 
-router.post("/get-one", checkPermission, async (req, res) => {
+router.post("/get-one", checkPermissionLevelAdmin, async (req, res) => {
     try {
         const { username } = req.body;
         const user = await userModel.findOne({ username });
